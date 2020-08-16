@@ -1,0 +1,88 @@
+swagger: "2.0"
+info:
+  description: "REST API for handling file on the server."
+  version: "1.0.0"
+  title: "File Handler"
+host: "localhost:8181"
+basePath: "/filehandler/v1"
+tags:
+- name: "file"
+  description: "Handling file"
+schemes:
+- "https"
+- "http"
+paths:
+  /file/{filename}:
+    get:
+      tags:
+      - "file"
+      summary: "Get file by filename"
+      description: "Returns a single file"
+      operationId: "getPetById"
+      produces:
+      - "application/octet-stream"
+      - "application/pdf"
+      - "application/json"
+      parameters:
+      - name: "filename"
+        in: "path"
+        description: "Name of the file to download"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "404":
+          description: "File not found"
+    post:
+      tags:
+      - "file"
+      summary: "Creates a copy of the file"
+      description: ""
+      operationId: "copyFile"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "filename"
+        in: "path"
+        description: "Name of the file to be copied"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "200":
+          description: "successful operation"
+        "404":
+          description: "File not found"
+    delete:
+      tags:
+      - "file"
+      summary: "Deletes a file"
+      description: ""
+      operationId: "deleteFile"
+      produces:
+      - "application/xml"
+      - "application/json"
+      parameters:
+      - name: "filename"
+        in: "path"
+        description: "File name to delete"
+        required: true
+        type: "string"
+        format: "string"
+      responses:
+        "404":
+          description: "File not found"
+definitions:
+  ApiResponse:
+    type: "object"
+    properties:
+      timestamp:
+        type: "string"
+        format: "string"
+      details:
+        type: "string"
+      message:
+        type: "string"
